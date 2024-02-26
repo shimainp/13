@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits, ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-const keep_alive = require('./keep_alive.js')
+const keep_alive = require('./keep_alive.sjs')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
