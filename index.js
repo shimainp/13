@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits, ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-const { token } = require('./config.json');
+const keep_alive = require('./keep_alive.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
@@ -117,4 +117,4 @@ client.on(Events.InteractionCreate, async interaction => {
 	// console.log(interaction.user.id);
 });
 
-client.login(token);
+client.login(process.env.token);
