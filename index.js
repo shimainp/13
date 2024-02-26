@@ -1,5 +1,5 @@
 const { Client, Events, GatewayIntentBits, ActionRowBuilder, EmbedBuilder, ButtonBuilder, ButtonStyle, SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
-const keep_alive = require('./keep_alive.sjs')
+const keep_alive = require('./keep_alive.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
@@ -58,17 +58,26 @@ client.once(Events.ClientReady, async readyClient => {
                 const currentTime = date.toLocaleTimeString();
                 
                 // console.log(`Today is ${currentDayOfWeek} and the time is ${currentTime}`);
-                if (currentDayOfWeek == "Sunday") {
+                if (currentDayOfWeek == "Monday") {
                     if (ae === undefined) {
-                        channel.send({ embeds: [exampleEmbed], components: [row], fetchReply: true });
+                        channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
                     } else {
-                        ae.edit({ embeds: [exampleEmbed], components: [row], fetchReply: true });
+                        // console.log(ae)
+                        if (ae.content === "") {
+                            ae.delete();
+                            channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+                        } else {
+                            ae.edit({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+                        }
+                        // ae.delete();
+                        // channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
                     }
                 } else {
                     if (ae === undefined) {
-                        channel.send({ embeds: [exampleEmbed], components: [row1], fetchReply: true });
+                        channel.send({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
                     } else {
-                        ae.edit({ embeds: [exampleEmbed], components: [row1], fetchReply: true });
+                        // console.log(ae)
+                        ae.edit({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
                     }
                 }
             
