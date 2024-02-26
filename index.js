@@ -4,7 +4,7 @@ const keep_alive = require('./keep_alive.js')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    var channel = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593666201030788");
+    var channel = client.guilds.cache.get("1159449040946204752").channels.cache.get("1211648365826408458");
 
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
@@ -113,7 +113,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
     const amName = interaction.fields.getTextInputValue('amNameInput');
     console.log({ amName });
-    var channel_Success = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593675592208464");
+    var channel_Success = client.guilds.cache.get("1159449040946204752").channels.cache.get("1211648387028615168");
 
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
