@@ -86,7 +86,7 @@ client.once(Events.ClientReady, async readyClient => {
             }
         });
 
-    }, 1000);
+    }, 60000);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
