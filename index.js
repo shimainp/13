@@ -28,7 +28,7 @@ client.once(Events.ClientReady, async readyClient => {
     //var channel2 = client.guilds.cache.get("1212816251907481761").channels.cache.get("1213092589801181284");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
-	.setDescription('```กรุณารายงานตัวด้วย```')
+	.setDescription('```กรุณารายงานตัวด้วย กรุณาไม่รายงานตัวซ้ำ```')
 
     const confirm = new ButtonBuilder()
         .setCustomId('confirm')
