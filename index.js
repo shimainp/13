@@ -4,7 +4,7 @@ const keep_alive = require('./keep_alive.js')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-    var channel2 = client.guilds.cache.get("1212816251907481761").channels.cache.get("1213092589801181284");
+    var channel2 = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593666201030788");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setDescription('```กรุณารายงานตัวด้วย```')
@@ -113,7 +113,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
     const amName = interaction.fields.getTextInputValue('amNameInput');
     console.log({ amName });
-    var channel_Success2 = client.guilds.cache.get("1212816251907481761").channels.cache.get("1212823014333489233");
+    var channel_Success2 = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593675592208464");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setDescription('```'+ amName +' ได้รายตัวแล้ว``` '+
