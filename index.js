@@ -2,20 +2,30 @@ const { Client, Events, GatewayIntentBits, ActionRowBuilder, EmbedBuilder, Butto
 const keep_alive = require('./keep_alive.js')
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+async function deleteOldMessages(channel) {
+    const fetchedMessages = await channel.messages.fetch({ limit: 100 });
+
+    for (const message of fetchedMessages.values()) {
+        await message.delete().catch(console.error);
+        console.log(`Deleted message: ${message.content}`);
+    }
+}
+
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
-	const guild = await client.guilds.fetch("1210593634949533757").catch(console.error);
+	const guild = await client.guilds.fetch("1212816251907481761").catch(console.error);
 	if (!guild) {
 	    console.error('Guild not found!');
 	    return;
 	}
-	const channel = await guild.channels.fetch("1210593666201030788").catch(console.error);
+	const channel = await guild.channels.fetch("1213092589801181284").catch(console.error);
 	if (!channel) {
 	    console.error('Channel not found!');
 	    return;
 	}
 	console.log(`Found channel: ${channel.name}`);
-    var channel2 = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593666201030788");
+    //var channel2 = client.guilds.cache.get("1212816251907481761").channels.cache.get("1213092589801181284");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setDescription('```กรุณารายงานตัวด้วย```')
@@ -53,15 +63,17 @@ client.once(Events.ClientReady, async readyClient => {
             );
           }
 
+
+
     setInterval(function(){
         
 
-        channel2.messages.fetch({limit: 1})
+        channel.messages.fetch({limit: 1})
         .then(messages => {
-                try {
+			try {
                 const ae = messages.first()
                 const date = changeTimeZone(new Date(), 'Asia/Bangkok');
-                // console.log(date); // 👉️ "Tue Jul 25 2023 08:31:12"
+                console.log(date); // 👉️ "Tue Jul 25 2023 08:31:12"
     
                 const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
                 const currentDayOfWeek = daysOfWeek[date.getDay()];
@@ -69,35 +81,50 @@ client.once(Events.ClientReady, async readyClient => {
                 const currentTime = date.toLocaleTimeString();
                 
                 // console.log(`Today is ${currentDayOfWeek} and the time is ${currentTime}`);
-                if (currentDayOfWeek == "Sunday") {
-                    if (ae === undefined) {
-                        channel2.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
-                    } else {
-                        // console.log(ae)
-                        if (ae.content === "") {
-                            ae.delete();
-                            channel2.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
-                        } else {
-                            ae.edit({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
-                        }
-                        // ae.delete();
-                        // channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
-                    }
-                } else {
-                    if (ae === undefined) {
-                        channel2.send({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
-                    } else {
-                        // console.log(ae)
-                        ae.edit({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
-                    }
-                }
-            
+				//console.log(ae)
+				if (ae !== undefined && ae.author.id !== client.user.id) {
+					console.log(11111);
+					const channel = client.channels.cache.get("1213092589801181284");
+					if (channel) {
+						deleteOldMessages(channel);
+					} else {
+						console.error('Channel not found!');
+					}
+				} else {
+					//console.log(`Today is ${currentDayOfWeek} and the time is ${currentTime}`);
+					if (currentDayOfWeek == "Tuesday") {
+						if (ae === undefined) {
+							channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+						} else {
+							// console.log(ae)
+							if (ae.content === "") {
+								ae.delete();
+								channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+							} else {
+								ae.edit({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+							}
+							// ae.delete();
+							// channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
+						}
+					} else {
+						if (ae === undefined) {
+							channel.send({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
+						} else {
+							// console.log(ae)
+							ae.edit({ content: '', embeds: [exampleEmbed], components: [row1], fetchReply: true });
+						}
+					}
+				}
+
+				
+				
+
             } catch (error) {
                 console.log(error)
             }
         });
 
-    }, 60000);
+    }, 450000);
 });
 
 client.on(Events.InteractionCreate, async interaction => {
@@ -124,7 +151,7 @@ client.on(Events.InteractionCreate, async interaction => {
 	if (!interaction.isModalSubmit()) return;
     const amName = interaction.fields.getTextInputValue('amNameInput');
     console.log({ amName });
-    var channel_Success2 = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593675592208464");
+    var channel_Success2 = client.guilds.cache.get("1212816251907481761").channels.cache.get("1212823014333489233");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
 	.setDescription('```'+ amName +' ได้รายตัวแล้ว``` '+
