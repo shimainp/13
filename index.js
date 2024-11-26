@@ -4,6 +4,17 @@ const keep_alive = require('./keep_alive.js')
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 client.once(Events.ClientReady, async readyClient => {
 	console.log(`Ready! Logged in as ${readyClient.user.tag}`);
+	const guild = await client.guilds.fetch("1210593634949533757").catch(console.error);
+	if (!guild) {
+	    console.error('Guild not found!');
+	    return;
+	}
+	const channel = await guild.channels.fetch("1210593666201030788").catch(console.error);
+	if (!channel) {
+	    console.error('Channel not found!');
+	    return;
+	}
+	console.log(`Found channel: ${channel.name}`);
     var channel2 = client.guilds.cache.get("1210593634949533757").channels.cache.get("1210593666201030788");
     const exampleEmbed = new EmbedBuilder()
 	.setColor(0x0099FF)
