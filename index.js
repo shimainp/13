@@ -92,7 +92,7 @@ client.once(Events.ClientReady, async readyClient => {
 					}
 				} else {
 					//console.log(`Today is ${currentDayOfWeek} and the time is ${currentTime}`);
-					if (currentDayOfWeek == "Tuesday") {
+					if (currentDayOfWeek == "Sunday") {
 						if (ae === undefined) {
 							channel.send({ content: '@everyone', embeds: [exampleEmbed], components: [row], fetchReply: true });
 						} else {
